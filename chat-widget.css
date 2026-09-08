@@ -1,0 +1,400 @@
+/* ==========================================================================
+   Adlek — burbuja de chat
+   Este archivo se carga DENTRO del Shadow DOM del widget (ver chat-widget.js).
+   Nada de aquí alcanza la página, y nada de la página alcanza al widget.
+   Paleta y tipografía tomadas de los estilos del export index.html.
+   ========================================================================== */
+
+:host {
+  /* Paleta — hex literales del export, sin reinterpretar */
+  --adlek-chat-green:        #1A6265;  /* nav y hero */
+  --adlek-chat-green-deep:   #10393B;  /* sombra dura del nav CTA */
+  --adlek-chat-orange:       #E8683C;  /* acento / CTA */
+  --adlek-chat-cream:        #F4F2ED;  /* fondo de página */
+  --adlek-chat-border:       #D8D5CD;  /* borde de tarjetas */
+  --adlek-chat-ink:          #1C1C1C;  /* texto sobre naranja/claro */
+  --adlek-chat-muted:        #3A3F3E;  /* texto secundario */
+  --adlek-chat-mint:         #DCE7E5;  /* claro sobre verde */
+  --adlek-chat-white:        #FFFFFF;
+
+  /* Tipografía — ya cargada por el export como data:font/woff2.
+     Los @font-face son document-scoped y llegan hasta aquí: no se recarga nada. */
+  --adlek-chat-font-display: 'Archivo Black', sans-serif;
+  --adlek-chat-font-ui:      Inter, system-ui, -apple-system, sans-serif;
+
+  /* Geometría */
+  --adlek-chat-gap:          20px;
+  --adlek-chat-launcher-size: 60px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+/* Sin transiciones hasta el primer pintado. El <link> del shadow root carga
+   despues de que el markup existe, y sin esto la sombra dura "entraria"
+   animada en cuanto el CSS aplica. */
+:host(:not(.adlek-chat-ready)) * { transition: none !important; }
+
+/* --------------------------------------------------------------- launcher */
+
+.adlek-chat-launcher {
+  position: absolute;
+  right:  calc(var(--adlek-chat-gap) + env(safe-area-inset-right));
+  bottom: calc(var(--adlek-chat-gap) + env(safe-area-inset-bottom));
+  pointer-events: auto;
+
+  width: var(--adlek-chat-launcher-size);
+  height: var(--adlek-chat-launcher-size);
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--adlek-chat-orange);
+  color: var(--adlek-chat-ink);
+  /* Sombra dura sin blur — mismo idioma que el nav CTA del export */
+  box-shadow: 3px 3px 0 var(--adlek-chat-green-deep);
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.adlek-chat-launcher:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--adlek-chat-green-deep);
+}
+
+.adlek-chat-launcher:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--adlek-chat-green-deep);
+}
+
+.adlek-chat-launcher:focus-visible {
+  outline: 3px solid var(--adlek-chat-green);
+  outline-offset: 3px;
+}
+
+.adlek-chat-launcher svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+/* Alterna burbuja / equis según el estado del panel */
+.adlek-chat-launcher .adlek-chat-icon-close { display: none; }
+.adlek-chat-launcher.is-open .adlek-chat-icon-open  { display: none; }
+.adlek-chat-launcher.is-open .adlek-chat-icon-close { display: block; }
+
+/* ------------------------------------------------------------------ panel */
+
+.adlek-chat-panel {
+  position: absolute;
+  right:  calc(var(--adlek-chat-gap) + env(safe-area-inset-right));
+  bottom: calc(
+    var(--adlek-chat-gap) + var(--adlek-chat-launcher-size) + 14px
+    + env(safe-area-inset-bottom)
+  );
+  pointer-events: auto;
+
+  width:  min(380px, calc(100vw - 2 * var(--adlek-chat-gap)));
+  height: min(560px, calc(100vh - 160px));
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  background: var(--adlek-chat-cream);
+  border: 1px solid var(--adlek-chat-border);
+  border-radius: 16px;
+  box-shadow: 6px 6px 0 var(--adlek-chat-green-deep);
+
+  transform-origin: bottom right;
+  animation: adlek-chat-panel-in 0.18s ease-out;
+}
+
+@keyframes adlek-chat-panel-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ----------------------------------------------------------------- header */
+
+.adlek-chat-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 14px 16px 20px;
+  background: var(--adlek-chat-green);
+  color: var(--adlek-chat-white);
+}
+
+.adlek-chat-header-text { flex: 1; min-width: 0; }
+
+.adlek-chat-title {
+  margin: 0;
+  font-family: var(--adlek-chat-font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  font-size: 1.05rem;
+  line-height: 1.1;
+}
+
+.adlek-chat-subtitle {
+  margin: 4px 0 0;
+  font-family: var(--adlek-chat-font-ui);
+  font-weight: 400;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: var(--adlek-chat-mint);
+}
+
+.adlek-chat-close {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: inherit;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.adlek-chat-close:hover { background: rgba(255, 255, 255, 0.14); }
+
+.adlek-chat-close:focus-visible {
+  outline: 2px solid var(--adlek-chat-white);
+  outline-offset: 2px;
+}
+
+.adlek-chat-close svg { display: block; width: 16px; height: 16px; }
+
+/* -------------------------------------------------------------------- log */
+
+.adlek-chat-log {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adlek-chat-msg {
+  max-width: 85%;
+  padding: 11px 14px;
+  border-radius: 16px;
+  font-family: var(--adlek-chat-font-ui);
+  font-weight: 400;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  white-space: pre-wrap;      /* respeta saltos de línea del usuario */
+  overflow-wrap: anywhere;    /* URLs largas no rompen el panel */
+}
+
+.adlek-chat-msg-bot {
+  align-self: flex-start;
+  background: var(--adlek-chat-white);
+  border: 1px solid var(--adlek-chat-border);
+  color: var(--adlek-chat-ink);
+  border-bottom-left-radius: 4px;
+}
+
+.adlek-chat-msg-user {
+  align-self: flex-end;
+  background: var(--adlek-chat-green);
+  color: var(--adlek-chat-white);
+  border-bottom-right-radius: 4px;
+}
+
+/* ----------------------------------------------------------------- typing */
+
+.adlek-chat-typing {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 14px;
+  background: var(--adlek-chat-white);
+  border: 1px solid var(--adlek-chat-border);
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+}
+
+.adlek-chat-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--adlek-chat-muted);
+  animation: adlek-chat-bounce 1.1s infinite ease-in-out;
+}
+
+.adlek-chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+.adlek-chat-typing span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes adlek-chat-bounce {
+  0%, 60%, 100% { opacity: 0.3; transform: none; }
+  30%           { opacity: 1;   transform: translateY(-3px); }
+}
+
+/* ------------------------------------------------------------------ error */
+
+.adlek-chat-error {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 16px 10px;
+  padding: 10px 12px;
+  background: var(--adlek-chat-white);
+  border: 1px solid var(--adlek-chat-orange);
+  border-radius: 16px;
+  font-family: var(--adlek-chat-font-ui);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--adlek-chat-ink);
+}
+
+.adlek-chat-error-text { flex: 1; min-width: 0; }
+
+.adlek-chat-retry {
+  flex: none;
+  padding: 7px 14px;
+  cursor: pointer;
+  font-family: var(--adlek-chat-font-ui);
+  font-weight: 600;
+  font-size: 0.78rem;
+  line-height: 1;
+  color: var(--adlek-chat-ink);
+  background: var(--adlek-chat-orange);
+  border: 0;
+  border-radius: 999px;
+}
+
+.adlek-chat-retry:focus-visible {
+  outline: 2px solid var(--adlek-chat-green);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------- form */
+
+.adlek-chat-form {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--adlek-chat-white);
+  border-top: 1px solid var(--adlek-chat-border);
+}
+
+.adlek-chat-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 42px;
+  max-height: 120px;
+  padding: 11px 14px;
+  resize: none;
+  overflow-y: auto;
+  font-family: var(--adlek-chat-font-ui);
+  font-weight: 400;
+  font-size: 0.92rem;   /* >=16px evitaría el zoom de iOS, pero rompe la escala;
+                           el meta viewport del export ya no permite zoom-on-focus */
+  line-height: 1.4;
+  color: var(--adlek-chat-ink);
+  background: var(--adlek-chat-cream);
+  border: 1px solid var(--adlek-chat-border);
+  border-radius: 16px;
+}
+
+.adlek-chat-input::placeholder { color: var(--adlek-chat-muted); opacity: 0.7; }
+
+.adlek-chat-input:focus {
+  outline: none;
+  border-color: var(--adlek-chat-green);
+}
+
+.adlek-chat-send {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--adlek-chat-ink);
+  background: var(--adlek-chat-orange);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 var(--adlek-chat-green-deep);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.adlek-chat-send:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--adlek-chat-green-deep);
+}
+
+.adlek-chat-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.adlek-chat-send:focus-visible {
+  outline: 2px solid var(--adlek-chat-green);
+  outline-offset: 2px;
+}
+
+.adlek-chat-send svg { display: block; width: 22px; height: 12px; }
+
+/* ------------------------------------------------------- responsive móvil
+   620px es el breakpoint que ya usa el export; no se introduce uno nuevo. */
+
+@media (max-width: 620px) {
+  .adlek-chat-panel {
+    inset: 0;
+    width: auto;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    animation: none;
+  }
+
+  .adlek-chat-header { padding-top: calc(16px + env(safe-area-inset-top)); }
+
+  .adlek-chat-form { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+
+  .adlek-chat-launcher {
+    --adlek-chat-launcher-size: 54px;
+    right:  calc(16px + env(safe-area-inset-right));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  /* A pantalla completa el panel ya cubre todo: el launcher estorbaría */
+  .adlek-chat-launcher.is-open { display: none; }
+}
+
+/* ------------------------------------------------- prefers-reduced-motion
+   Coherente con la media query que ya trae el export. */
+
+@media (prefers-reduced-motion: reduce) {
+  .adlek-chat-panel   { animation: none; }
+  .adlek-chat-launcher,
+  .adlek-chat-send    { transition: none; }
+  .adlek-chat-launcher:hover,
+  .adlek-chat-launcher:active,
+  .adlek-chat-send:hover:not(:disabled) { transform: none; }
+  .adlek-chat-typing span { animation: none; opacity: 0.5; }
+}
