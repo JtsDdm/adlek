@@ -106,3 +106,24 @@ Reglas que se derivan de esto:
   puede desde JS en runtime (`el.setAttribute(...)`). El HTML fuente vive dentro del string JSON de
   la línea 393; editarlo a mano está descartado.
 - Si algún día un script debe viajar *dentro* del export, pedírselo a Claude Design y **re-exportar**.
+
+### Scripts actualmente montados
+
+Antes de `</body>` hay dos líneas, y son el **único** cambio al export:
+
+```html
+<script defer src="page-boot.js"></script>
+<script defer src="chat-widget.js"></script>
+```
+
+`page-boot.js` resuelve un parpadeo propio del export: entre el swap del
+documento y `hideRawTemplate()` del `dc-runtime`, la plantilla cruda queda
+visible unos milisegundos (medido: 8.6 ms con 7836 px de alto), y después hay
+~104 ms más de pantalla vacía hasta que React pinta. El puente oculta el
+`<x-dc>` en el instante del swap y sostiene el verde `#1A6265` durante el
+hueco, retirándose solo al montar React.
+
+Cuidado si se toca: quitar el `<style>` del puente **es en sí mismo una
+mutación del DOM**. Si el `MutationObserver` sigue conectado en ese momento, el
+callback vuelve a ver que no hay estilo y lo reinstala en bucle. Por eso
+`finalizar()` desconecta el observer y retira el estilo en el mismo paso.
