@@ -116,12 +116,16 @@ Antes de `</body>` hay dos líneas, y son el **único** cambio al export:
 <script defer src="chat-widget.js"></script>
 ```
 
-`page-boot.js` resuelve un parpadeo propio del export: entre el swap del
-documento y `hideRawTemplate()` del `dc-runtime`, la plantilla cruda queda
-visible unos milisegundos (medido: 8.6 ms con 7836 px de alto), y después hay
-~104 ms más de pantalla vacía hasta que React pinta. El puente oculta el
-`<x-dc>` en el instante del swap y sostiene el verde `#1A6265` durante el
-hueco, retirándose solo al montar React.
+`page-boot.js` resuelve tres parpadeos propios del export, todos sin tocarlo:
+el splash placeholder (133-167 ms de boceto SVG con riel, círculos y la píldora
+"Unpacking…", que se sustituye por el logo real), la plantilla cruda visible
+entre el swap y `hideRawTemplate()` del `dc-runtime` (8.6 ms con 7836 px de
+alto), y el hueco de ~104 ms hasta que React pinta. Sostiene el verde `#1A6265`
+y el logo durante todo el arranque, y se retira solo al montar React.
+
+`adlek-logo.png` es una **copia** reducida del logo que ya viaja en el bundle,
+no una extracción: el export conserva el suyo. Existe porque durante el splash
+el bundle aún no se ha desempaquetado y su copia todavía no es accesible.
 
 Cuidado si se toca: quitar el `<style>` del puente **es en sí mismo una
 mutación del DOM**. Si el `MutationObserver` sigue conectado en ese momento, el

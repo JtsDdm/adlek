@@ -8,7 +8,8 @@ tal cual está.
 | Archivo | Qué es |
 |---|---|
 | `index.html` | La landing. **Export de Claude Design y fuente de verdad del diseño.** |
-| `page-boot.js` | Puente de arranque: evita el parpadeo de contenido crudo al cargar. |
+| `page-boot.js` | Arranque: splash con el logo real y sin parpadeos al cargar. |
+| `adlek-logo.png` | Logo para el splash. Copia reducida del que ya viaja en el bundle. |
 | `chat-widget.js` | Burbuja de chat, aislada en Shadow DOM. Se monta sola en runtime. |
 | `chat-widget.css` | Estilos del widget. Se carga *dentro* del Shadow DOM, no desde el `<head>`. |
 | `CLAUDE.md` | Reglas de trabajo sobre el export. **Leer antes de tocar `index.html`.** |
@@ -35,28 +36,36 @@ El export se toca **solo** con estas dos líneas antes de `</body>`:
 <script defer src="chat-widget.js"></script>
 ```
 
-### `page-boot.js` — puente de arranque
+### `page-boot.js` — arranque limpio
 
-Al desempaquetarse, el bundle reemplaza el documento y deja por un instante la
-plantilla **cruda** a la vista: los 5 FAQ abiertos a la vez, los `image-slot`
-sin estilo y los `{{ placeholders }}` como texto. El `dc-runtime` la oculta,
-pero unos milisegundos tarde, y el navegador alcanza a pintarla: es el
-pantallazo de "elementos amontonados" al recargar.
+Cargar la página pasaba por tres estados feos antes de mostrar la landing.
+Medido sobre grabación de pantalla a 60 fps y con instrumentación en local:
 
-Medido en local, antes del arreglo:
-
-| Momento | t | Qué se ve |
+| Fase | Duración | Qué se veía |
 |---|---|---|
-| swap del documento | 42.6 ms | plantilla cruda, 7836 px de alto |
-| el runtime la oculta | 51.2 ms | **8.6 ms de contenido amontonado** |
-| React monta y pinta | 155.0 ms | **103.8 ms más de pantalla vacía** |
+| Splash placeholder | 133-167 ms | un boceto SVG: riel, círculos, caja "ADLEK", píldora "Unpacking…" |
+| Plantilla cruda | 8.6 ms | los 5 FAQ abiertos, `image-slot` sin estilo, `{{ placeholders }}` |
+| Hueco | 103.8 ms | pantalla vacía hasta que React pinta |
 
-`page-boot.js` cierra las dos ventanas: oculta la plantilla cruda en el mismo
-instante del swap (el callback de `MutationObserver` es una microtask, así que
-corre antes del pintado) y sostiene el verde del splash durante el hueco. Se
-retira solo en cuanto React monta, y también por timeout si el bundle fallara,
-para no dejar nunca una pantalla vacía. Tras el arreglo la ventana de crudo
-expuesto baja de 8.6 ms a 0.4 ms, sin pintado posible en medio.
+Las tres las cubre `page-boot.js`, y las tres se resuelven **sin tocar el
+export**:
+
+1. **Splash.** El placeholder del bundle no es la marca, así que se sustituye
+   por el logo real sobre el mismo verde `#1A6265`.
+2. **Plantilla cruda.** Se oculta el `<x-dc>` en el mismo instante del swap. El
+   callback de `MutationObserver` es una microtask, y las microtasks drenan
+   antes del pintado: le gana la carrera al render. La ventana expuesta baja de
+   8.6 ms a 0.4 ms, sin pintado posible en medio.
+3. **Hueco.** Se sostienen el mismo verde y el mismo logo hasta que React monta.
+
+Como el verde es también el del hero, las tres fases quedan como una sola
+imagen continua. El puente se retira solo al montar React, y también por
+timeout si el bundle fallara, para no dejar nunca una pantalla vacía.
+
+Sobre `adlek-logo.png`: el logo ya viaja dentro del bundle, pero ahí no sirve
+—no está disponible hasta que el bundle se desempaqueta, que es justo lo que
+estamos esperando. Por eso hay una copia aparte, reducida a 520 px y en
+grises+alfa (16 KB en vez de 31 KB). El export conserva la suya intacta.
 
 ### `chat-widget.js` — la burbuja de chat
 
