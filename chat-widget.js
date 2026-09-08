@@ -365,19 +365,21 @@
   function pickMockReply(text) {
     var t = (text || '').toLowerCase();
 
-    if (/precio|costo|cuesta|cuánto|cuanto|tarifa|presupuesto/.test(t)) {
+    /* El orden importa: "cuanto tiempo" es una pregunta de plazos, no de precio,
+       asi que los plazos se evaluan primero. */
+    if (/tiempo|cu[aá]ndo|tarda|plazo|entrega|arrancan|empezar|empiezan/.test(t)) {
+      return 'El arranque toma entre dos y tres semanas. Desde el primer mes ya hay campañas corriendo.';
+    }
+    if (/precio|costo|cuesta|tarifa|presupuesto|cotiza|invers|cu[aá]nto (es|sale|cobran|vale)/.test(t)) {
       return 'El arranque va de $4,500 a $9,000 y la mensualidad de $3,500 a $4,500. ' +
              'Se lo cotizamos exacto después de conocer su clínica.';
     }
     if (/whatsapp|llamar|teléfono|telefono|hablar|cita|agenda/.test(t)) {
       return 'Con gusto. Escríbanos por WhatsApp y agendamos 15 minutos para ver su caso.';
     }
-    if (/cómo|como|funciona|sistema|servicio|hacen|trabajan/.test(t)) {
+    if (/c[oó]mo|funciona|sistema|servicio|hacen|trabajan/.test(t)) {
       return 'Armamos el sistema completo: sitio, campañas y seguimiento, todo conectado. ' +
              'Usted solo atiende a los pacientes que llegan.';
-    }
-    if (/tiempo|cuándo|cuando|tarda|plazo|entrega/.test(t)) {
-      return 'El arranque toma entre dos y tres semanas. Desde el primer mes ya hay campañas corriendo.';
     }
     return 'Gracias por escribir. Cuéntenos en qué ciudad está su clínica y qué servicio ' +
            'quiere llenar, y le decimos cómo lo resolvemos.';
