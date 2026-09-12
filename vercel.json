@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "https://adlek-admin.vercel.app/admin"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "https://adlek-admin.vercel.app/admin/:path*"
+    }
+  ]
+}
