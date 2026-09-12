@@ -1,0 +1,7 @@
+.DS_Store
+.vercel/
+node_modules/
+
+# Grabaciones y capturas de trabajo, no forman parte del sitio
+*.mov
+*.mp4
