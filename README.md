@@ -12,6 +12,8 @@ tal cual está.
 | `adlek-logo.png` | Logo para el splash. Copia reducida del que ya viaja en el bundle. |
 | `chat-widget.js` | Burbuja de chat, aislada en Shadow DOM. Se monta sola en runtime. |
 | `chat-widget.css` | Estilos del widget. Se carga *dentro* del Shadow DOM, no desde el `<head>`. |
+| `footer-links.js` | Agrega "Aviso de Privacidad" al pie de la landing, en runtime. |
+| `privacidad/` | Aviso de Privacidad, servido en `/privacidad`. HTML estático normal, no bundle. |
 | `CLAUDE.md` | Reglas de trabajo sobre el export. **Leer antes de tocar `index.html`.** |
 
 ## `index.html` no es HTML plano
@@ -27,13 +29,14 @@ procedimiento correcto para agregar scripts están en [`CLAUDE.md`](CLAUDE.md).
 La página funciona 100 % offline: React, imágenes y fuentes viajan dentro del
 archivo. Las únicas URLs externas son de navegación (WhatsApp, correo, Instagram).
 
-## Los dos scripts añadidos
+## Los scripts añadidos
 
-El export se toca **solo** con estas dos líneas antes de `</body>`:
+El export se toca **solo** con estas tres líneas antes de `</body>`:
 
 ```html
 <script defer src="page-boot.js"></script>
 <script defer src="chat-widget.js"></script>
+<script defer src="footer-links.js"></script>
 ```
 
 ### `page-boot.js` — arranque limpio
@@ -94,4 +97,5 @@ En Vercel, el endpoint iría en `api/chat.js` y quedaría servido en esa misma r
 ## Despliegue
 
 Vercel, sin configuración: framework preset **Other**, sin build command y con el
-root del repo como output. `index.html` se sirve en `/`.
+root del repo como output. `index.html` se sirve en `/` y `privacidad/index.html`
+en `/privacidad`.

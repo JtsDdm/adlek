@@ -109,11 +109,12 @@ Reglas que se derivan de esto:
 
 ### Scripts actualmente montados
 
-Antes de `</body>` hay dos líneas, y son el **único** cambio al export:
+Antes de `</body>` hay tres líneas, y son el **único** cambio al export:
 
 ```html
 <script defer src="page-boot.js"></script>
 <script defer src="chat-widget.js"></script>
+<script defer src="footer-links.js"></script>
 ```
 
 `page-boot.js` resuelve tres parpadeos propios del export, todos sin tocarlo:
@@ -131,3 +132,19 @@ Cuidado si se toca: quitar el `<style>` del puente **es en sí mismo una
 mutación del DOM**. Si el `MutationObserver` sigue conectado en ese momento, el
 callback vuelve a ver que no hay estilo y lo reinstala en bucle. Por eso
 `finalizar()` desconecta el observer y retira el estilo en el mismo paso.
+
+`footer-links.js` agrega "Aviso de Privacidad" (→ `/privacidad`) al final de la
+columna de enlaces del pie. Es la **única excepción** a "nunca inyectar dentro de
+`#dc-root`", y se hizo a sabiendas: React no borra nodos ajenos al reconciliar
+(verificado: el mismo nodo sobrevive a todos los toggles del acordeón) y, por si
+un render futuro recreara la columna, un `MutationObserver` lo repone. Si se
+re-exporta con el enlace ya en la plantilla, el script lo detecta y no hace nada.
+
+### Páginas aparte del export
+
+`privacidad/index.html` (servida en `/privacidad`) es HTML estático normal, **no**
+un bundle: se edita a mano sin las restricciones de arriba. Replica colores,
+tipografías y piezas de la landing. Sus fuentes (`privacidad/fuentes/`) y logos
+son **copias** de los assets del bundle, igual que `adlek-logo.png`. La sección 7
+lleva `id="eliminacion-de-datos"`, enlazada desde fuera
+(`https://adlek.com.mx/privacidad#eliminacion-de-datos`): no cambiar ese id.
