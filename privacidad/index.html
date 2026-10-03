@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aviso de Privacidad · Adlek</title>
-<meta name="description" content="Aviso de Privacidad de Adlek: qué datos personales recabamos, para qué los usamos, cómo ejercer tus derechos ARCO y cómo pedir la eliminación de tus datos.">
+<meta name="description" content="Aviso de Privacidad de Adlek: qué datos recabamos (incluidos los de Meta, Google y CRM), para qué los usamos, cómo ejercer tus derechos ARCO y cómo pedir la eliminación de tus datos.">
 <meta name="theme-color" content="#1A6265">
 <link rel="canonical" href="https://adlek.com.mx/privacidad">
+<link rel="alternate" hreflang="es" href="https://adlek.com.mx/privacidad">
+<link rel="alternate" hreflang="en" href="https://adlek.com.mx/privacidad/en">
 <link rel="preload" href="/privacidad/fuentes/archivo-black-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/privacidad/fuentes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <!--
@@ -14,100 +16,11 @@
   tipografías y piezas de la landing (nav verde, títulos en Archivo Black,
   pie naranja). Las fuentes y los logos son COPIAS de los que viajan en el
   bundle; el export no se toca.
+
+  La versión en inglés vive en /privacidad/en y comparte estilos.css. Si se
+  cambia el contenido de una, cambiar también la otra.
 -->
-<style>
-/* latin-ext */
-@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url('/privacidad/fuentes/archivo-black-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-/* latin */
-@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url('/privacidad/fuentes/archivo-black-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-/* latin-ext */
-@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url('/privacidad/fuentes/inter-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-/* latin */
-@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url('/privacidad/fuentes/inter-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:96px}
-body{margin:0;background:#F4F2ED;color:#1C1C1C;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:#1A6265;text-decoration:none}
-a:hover{color:#E8683C}
-img,svg{max-width:100%}
-
-/* Nav — idéntica a la de la landing */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:#1A6265;border-bottom:1px solid rgba(244,242,237,0.18)}
-.nav-in{max-width:1200px;margin:0 auto;padding:14px clamp(16px,5vw,48px);display:flex;align-items:center;justify-content:space-between;gap:16px}
-.nav-logo{display:inline-flex;align-items:center;line-height:0}
-.nav-logo img{display:block;height:30px;width:auto}
-.nav-cta{display:inline-flex;align-items:center;gap:10px;background:#E8683C;color:#1C1C1C;font-family:Inter,sans-serif;font-weight:600;font-size:0.9rem;line-height:1;padding:12px 20px;border-radius:999px;box-shadow:3px 3px 0 #10393B}
-.nav-cta:hover{color:#1C1C1C}
-.nav-cta svg{width:26px;height:14px;flex:none}
-
-/* Encabezado verde */
-.head{background:#1A6265;padding:clamp(130px,20vh,200px) clamp(20px,5vw,48px) clamp(64px,9vw,110px)}
-.wrap{max-width:1200px;margin:0 auto;width:100%}
-.kicker{margin:0 0 clamp(18px,3vw,26px);font-weight:500;font-size:0.8rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(244,242,237,0.72)}
-.kicker a{color:inherit}
-.kicker a:hover{color:#E8683C}
-h1{margin:0;font-family:'Archivo Black',sans-serif;font-weight:400;text-transform:uppercase;color:#FFFFFF;font-size:clamp(2.6rem,11vw,7rem);line-height:1.0;letter-spacing:-0.02em;text-wrap:balance}
-.head svg{display:block;width:min(100%,460px);height:22px;margin:clamp(20px,3vw,32px) 0 0}
-.fecha{margin:clamp(22px,3.5vw,32px) 0 0;font-size:1.05rem;line-height:1.6;color:#F4F2ED}
-
-/* Cuerpo */
-.body{padding:clamp(56px,9vw,120px) clamp(20px,5vw,48px) clamp(80px,12vw,150px)}
-.grid{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:clamp(40px,6vw,96px);align-items:start}
-.toc{position:sticky;top:96px}
-.toc p{margin:0 0 14px;font-weight:500;font-size:0.8rem;letter-spacing:0.22em;text-transform:uppercase;color:#1A6265}
-.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;border-left:2px solid #D8D5CD}
-.toc a{display:block;padding:6px 0 6px 16px;margin-left:-2px;border-left:2px solid transparent;font-size:0.92rem;line-height:1.35;color:#3A3F3E}
-.toc a:hover{color:#E8683C;border-left-color:#E8683C}
-
-.doc{max-width:760px}
-.doc > p,.doc section > p,.doc li{font-size:1.05rem;line-height:1.6;color:#3A3F3E}
-.intro{margin:0 0 clamp(40px,6vw,64px)}
-.doc section{margin:0 0 clamp(44px,6vw,68px)}
-.doc section:last-child{margin-bottom:0}
-h2{margin:0 0 18px;font-family:'Archivo Black',sans-serif;font-weight:400;text-transform:uppercase;color:#1A6265;font-size:clamp(1.35rem,3.2vw,2rem);line-height:1.05;letter-spacing:-0.01em;display:flex;gap:0.55em;align-items:baseline}
-h2 .n{color:#E8683C;flex:none}
-h3{margin:26px 0 10px;font-family:Inter,sans-serif;font-weight:600;font-size:1.05rem;line-height:1.4;color:#1C1C1C}
-.doc p{margin:0 0 14px}
-.doc ul,.doc ol{margin:0 0 16px;padding-left:1.4em}
-.doc li{margin:0 0 8px;padding-left:0.2em}
-.doc li::marker{color:#E8683C;font-weight:700}
-.doc strong{color:#1C1C1C;font-weight:600}
-.doc a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
-
-/* La sección 7 se enlaza desde fuera (#eliminacion-de-datos): va en tarjeta,
-   como las del FAQ de la landing. */
-.card{background:#FFFFFF;border:1px solid #D8D5CD;border-radius:16px;padding:clamp(22px,3vw,34px)}
-.card:target{border-color:#E8683C;box-shadow:6px 6px 0 #E8683C}
-
-/* Pie naranja — mismo bloque que cierra la landing */
-.foot{background:#E8683C;padding:clamp(56px,8vw,100px) clamp(20px,5vw,48px) clamp(64px,9vw,110px)}
-.foot-cta{margin:0;font-family:'Archivo Black',sans-serif;text-transform:uppercase;color:#1C1C1C;font-size:clamp(1.8rem,6vw,3.4rem);line-height:1.0;letter-spacing:-0.02em;max-width:18ch}
-.foot-sub{margin:clamp(18px,3vw,26px) 0 0;font-size:1.05rem;line-height:1.6;color:#3D1E12;max-width:44ch}
-.foot-sub a{color:#1C1C1C;text-decoration:underline;text-underline-offset:3px}
-.foot-row{margin:clamp(44px,7vw,80px) 0 0;padding:clamp(28px,4vw,40px) 0 0;border-top:2px solid #1C1C1C;display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,60px);align-items:flex-start;justify-content:space-between}
-.foot-row img{display:block;height:34px;width:auto}
-.tag{margin:14px 0 0;font-weight:500;font-size:0.8rem;letter-spacing:0.22em;text-transform:uppercase;color:#3D1E12}
-.foot-links{display:flex;flex-direction:column;gap:8px}
-.foot-links a{color:#1C1C1C;font-size:1rem;line-height:1.5}
-.foot-links a:hover{color:#FFFFFF}
-.foot-links a[aria-current]{text-decoration:underline;text-underline-offset:3px}
-.foot-row > p{margin:0}
-
-@media (max-width:900px){
-  .grid{grid-template-columns:minmax(0,1fr)}
-  .toc{position:static}
-}
-@media (max-width:620px){
-  .nav-cta{font-size:0.8rem;padding:10px 15px;gap:7px}
-  .nav-cta svg{width:20px;height:11px}
-  .nav-logo img{height:24px}
-  html{scroll-padding-top:80px}
-}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-}
-</style>
+<link rel="stylesheet" href="/privacidad/estilos.css">
 </head>
 <body>
 
@@ -121,10 +34,10 @@ h3{margin:26px 0 10px;font-family:Inter,sans-serif;font-weight:600;font-size:1.0
 <main>
   <section class="head">
     <div class="wrap">
-      <p class="kicker"><a href="/">Adlek</a> · Legal</p>
+      <p class="kicker"><a href="/">Adlek</a> · Legal · <a href="/privacidad/en" hreflang="en" lang="en">English</a></p>
       <h1>Aviso de privacidad</h1>
       <svg viewBox="0 0 460 26" preserveAspectRatio="none" aria-hidden="true"><path d="M4 22 C 140 22 230 8 456 4" fill="none" stroke="#E8683C" stroke-width="8" stroke-linecap="round"/></svg>
-      <p class="fecha">Última actualización: <time datetime="2026-09-28">28 de septiembre de 2026</time></p>
+      <p class="fecha">Última actualización: <time datetime="2026-10-02">2 de octubre de 2026</time></p>
     </div>
   </section>
 
@@ -141,23 +54,51 @@ h3{margin:26px 0 10px;font-family:Inter,sans-serif;font-weight:600;font-size:1.0
           <li><a href="#derechos-arco">6. Derechos ARCO y revocación del consentimiento</a></li>
           <li><a href="#eliminacion-de-datos">7. Eliminación de datos</a></li>
           <li><a href="#cookies">8. Cookies y tecnologías similares</a></li>
-          <li><a href="#cambios">9. Cambios a este aviso</a></li>
-          <li><a href="#contacto">10. Contacto</a></li>
+          <li><a href="#menores">9. Menores de edad</a></li>
+          <li><a href="#cambios">10. Cambios a este aviso</a></li>
+          <li><a href="#contacto">11. Contacto</a></li>
         </ol>
       </nav>
 
       <article class="doc">
-        <p class="intro">José Alek Nava Sánchez (en adelante, “Adlek”), con domicilio en Hidalgo #25-B, Xaloztoc, Tlaxcala, México, es responsable del tratamiento de los datos personales que nos proporcionas. Este aviso se emite conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y su Reglamento.</p>
+        <p class="intro">José Alek Nava Sánchez (en adelante, “Adlek”), con domicilio en Hidalgo #25-B, Xaloztoc, Tlaxcala, México, es responsable del tratamiento de los datos personales que nos proporcionas. Este aviso se emite conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y su Reglamento, y cubre nuestros servicios de gestión de publicidad y marketing, incluida nuestra aplicación de software que se conecta con Meta (Facebook e Instagram), Google y plataformas de gestión de clientes (CRM) (los “Servicios”). Usamos los datos solo para atenderte y para planear, ejecutar, medir y reportar campañas de los negocios que nos contratan. No vendemos información personal.</p>
 
         <section id="datos-que-recabamos">
           <h2><span class="n">1.</span><span>Datos personales que recabamos</span></h2>
-          <p>Cuando nos contactas por WhatsApp, redes sociales, formularios de nuestro sitio web u otros medios, podemos recabar:</p>
+          <p>Este aviso aplica a:</p>
+          <ul>
+            <li><strong>Personas que nos contactan</strong> por WhatsApp, redes sociales, formularios de nuestro sitio web u otros medios, y visitantes de nuestro sitio.</li>
+            <li><strong>Clientes:</strong> negocios que contratan a Adlek y conectan sus cuentas publicitarias, páginas, píxeles o CRM a nuestros Servicios.</li>
+            <li><strong>Prospectos y visitantes de nuestros clientes:</strong> personas que ven los anuncios de nuestros clientes, visitan sus páginas, llenan un formulario o chatean con ellos.</li>
+          </ul>
+          <p>Cuando tratamos datos de los prospectos y visitantes de un cliente, actuamos por cuenta y bajo las instrucciones de ese cliente, como encargado del tratamiento. También aplica el aviso de privacidad del propio cliente.</p>
+
+          <h3>Cuando nos contactas</h3>
           <ul>
             <li><strong>Datos de identificación y contacto:</strong> nombre, número de teléfono (incluido tu número de WhatsApp), correo electrónico y nombre de perfil.</li>
             <li><strong>Contenido de tus comunicaciones:</strong> mensajes, notas de voz, imágenes y documentos que nos envíes.</li>
             <li><strong>Datos relacionados con el servicio:</strong> el servicio o tratamiento que te interesa, fechas de citas, el canal por el que llegaste y el historial de interacciones.</li>
             <li><strong>Datos técnicos:</strong> la fecha y hora de los mensajes y su estado de entrega, obtenidos a través de las plataformas de mensajería.</li>
           </ul>
+
+          <h3>De las plataformas que conectan nuestros clientes</h3>
+          <ul>
+            <li><strong>Meta (Facebook / Instagram):</strong> configuración de cuentas publicitarias, campañas, conjuntos de anuncios, anuncios y creativos; métricas de rendimiento (impresiones, clics, gasto, conversiones); identificadores de páginas y del Business Manager; datos de eventos del píxel y de la API de Conversiones.</li>
+            <li><strong>Plataformas CRM (por ejemplo GoHighLevel / LeadConnector):</strong> registros de prospectos y contactos, como nombre, teléfono, correo electrónico, código postal, respuestas de formularios, etapa del embudo y el anuncio o campaña que generó el prospecto.</li>
+            <li><strong>Google (Analytics / Ads):</strong> datos agregados de tráfico y conversiones.</li>
+          </ul>
+
+          <h3>De las páginas y sitios web que administramos</h3>
+          <ul>
+            <li>Información que una persona envía en un formulario o chat, por ejemplo nombre, teléfono, correo, dirección o código postal y detalles del proyecto.</li>
+            <li>Datos técnicos y de eventos recabados por el Píxel de Meta, las etiquetas de Google y tecnologías similares (ver la <a href="#cookies">sección 8</a>).</li>
+          </ul>
+
+          <h3>Directamente de nuestros clientes</h3>
+          <ul>
+            <li>Datos de contacto y facturación, información del negocio, materiales creativos y las instrucciones que nos dan.</li>
+          </ul>
+
           <p>No recabamos datos personales sensibles (por ejemplo, de salud, origen étnico, creencias o datos financieros) por estos medios. Te pedimos no enviarlos. Si alguno de nuestros servicios requiere datos sensibles, te pediremos tu consentimiento expreso y por escrito antes de tratarlos.</p>
         </section>
 
@@ -169,6 +110,11 @@ h3{margin:26px 0 10px;font-family:Inter,sans-serif;font-weight:600;font-size:1.0
             <li>Agendar, confirmar, recordar y dar seguimiento a citas o reuniones.</li>
             <li>Prestarte los servicios que contrates y darte soporte.</li>
             <li>Operar asistentes automatizados (chatbots) que respondan tus mensajes y, cuando haga falta, te canalicen con una persona.</li>
+            <li>Crear, administrar, optimizar y reportar las campañas de publicidad de nuestros clientes.</li>
+            <li>Enviar eventos de conversión (como un formulario enviado) a las plataformas publicitarias, incluso mediante la API de Conversiones de Meta, para que midan y optimicen los anuncios.</li>
+            <li>Entregar los prospectos al CRM de nuestros clientes y ayudarles a dar seguimiento a quienes los contactaron.</li>
+            <li>Elaborar tableros, reportes y análisis para nuestros clientes.</li>
+            <li>Operar, proteger, diagnosticar y mejorar nuestros Servicios, y cumplir obligaciones legales y las políticas de las plataformas.</li>
           </ol>
           <h3>Finalidades secundarias, que no son necesarias para el servicio:</h3>
           <ol>
@@ -176,10 +122,12 @@ h3{margin:26px 0 10px;font-family:Inter,sans-serif;font-weight:600;font-size:1.0
             <li>Hacer estadísticas internas para mejorar nuestra atención.</li>
           </ol>
           <p>Si no quieres que usemos tus datos para las finalidades secundarias, escríbenos al correo de la <a href="#eliminacion-de-datos">sección 7</a>. Negarte a ellas no afecta el servicio que nos pidas.</p>
+          <p><strong>No</strong> vendemos información personal ni usamos los datos de un cliente en beneficio de otro.</p>
         </section>
 
         <section id="whatsapp-y-meta">
           <h2><span class="n">3.</span><span>Uso de WhatsApp y de otras plataformas de Meta</span></h2>
+          <h3>WhatsApp</h3>
           <p>Nos comunicamos contigo a través de WhatsApp Business Platform, de Meta Platforms, Inc. y sus afiliadas. Cuando nos escribes por WhatsApp:</p>
           <ul>
             <li>Meta procesa los mensajes conforme a sus propias políticas: <a href="https://www.whatsapp.com/legal/privacy-policy" rel="noopener">Política de privacidad de WhatsApp</a> y <a href="https://www.whatsapp.com/legal/business-terms" rel="noopener">Condiciones de WhatsApp Business</a>.</li>
@@ -187,24 +135,34 @@ h3{margin:26px 0 10px;font-family:Inter,sans-serif;font-weight:600;font-size:1.0
             <li>No vendemos tus datos ni los usamos para fines distintos a los aquí descritos.</li>
             <li>Solo te enviaremos mensajes que inicie Adlek (por ejemplo, recordatorios de cita) si nos diste tu consentimiento. Puedes pedir que dejemos de enviártelos en cualquier momento; basta con responder “BAJA”.</li>
           </ul>
+          <h3>Facebook e Instagram: API de Marketing, Píxel y API de Conversiones</h3>
+          <p>Cuando un cliente conecta sus cuentas de Meta a nuestra aplicación, accedemos a los datos descritos en la <a href="#datos-que-recabamos">sección 1</a> mediante la API de Marketing de Meta, solo con los permisos que el cliente otorga, como <code>ads_management</code>, <code>ads_read</code>, <code>business_management</code>, <code>pages_show_list</code>, <code>pages_read_engagement</code> y <code>pages_manage_ads</code>.</p>
+          <p>Usamos esos datos únicamente para administrar y medir las campañas de ese cliente. El cliente puede retirar el acceso en cualquier momento quitando nuestra app de su cuenta (ver la <a href="#eliminacion-de-datos">sección 7</a>).</p>
         </section>
 
         <section id="transferencias">
           <h2><span class="n">4.</span><span>Transferencias y encargados</span></h2>
-          <p>Para operar nuestros servicios compartimos datos con proveedores tecnológicos que actúan como encargados, es decir, que tratan los datos por cuenta nuestra y bajo nuestras instrucciones:</p>
+          <p>Solo compartimos datos en la medida necesaria para prestar los Servicios. Lo hacemos con el cliente al que pertenecen los datos, para sus reportes y el seguimiento de sus prospectos, y con proveedores tecnológicos que actúan como encargados, es decir, que tratan los datos por cuenta nuestra y bajo nuestras instrucciones:</p>
           <ul>
-            <li><strong>Meta Platforms, Inc.</strong> (WhatsApp Business Platform), para enviar y recibir mensajes.</li>
-            <li><strong>Proveedores de alojamiento e infraestructura</strong> (servidores, almacenamiento en la nube y respaldos), para guardar de forma segura el historial de conversaciones.</li>
+            <li><strong>Meta Platforms, Inc.</strong> (WhatsApp Business Platform, API de Marketing, Píxel y API de Conversiones), para enviar y recibir mensajes, publicar anuncios y medir conversiones.</li>
+            <li><strong>Google LLC</strong>, para analítica y medición de conversiones publicitarias.</li>
+            <li><strong>Proveedores de CRM</strong> (por ejemplo GoHighLevel / LeadConnector), para guardar y administrar los prospectos de nuestros clientes.</li>
+            <li><strong>Proveedores de alojamiento, bases de datos e infraestructura</strong> (por ejemplo Vercel y Supabase), para alojar sitios web y guardar de forma segura los datos de nuestros Servicios y el historial de conversaciones.</li>
             <li><strong>Proveedores de correo electrónico transaccional</strong>, para enviar notificaciones.</li>
-            <li><strong>Proveedores de inteligencia artificial</strong>, cuando un asistente automatizado procesa tus mensajes para responderte.</li>
+            <li><strong>Proveedores de inteligencia artificial</strong> (por ejemplo Anthropic), cuando un asistente automatizado procesa tus mensajes para responderte o para generar análisis, textos y reportes. Solo se envían los datos necesarios para cada tarea y, según nuestros acuerdos con ellos, no se usan para entrenar sus modelos.</li>
           </ul>
-          <p>Algunos de estos proveedores pueden estar fuera de México. No hacemos transferencias que requieran tu consentimiento, salvo las que permite el artículo 37 de la LFPDPPP o las que exija una autoridad competente.</p>
+          <p>Algunos de estos proveedores pueden estar fuera de México. No hacemos transferencias que requieran tu consentimiento, salvo las que permite el artículo 37 de la LFPDPPP o las que exija una autoridad competente, o cuando sea necesario para proteger derechos y la seguridad de las personas.</p>
         </section>
 
         <section id="conservacion-y-seguridad">
           <h2><span class="n">5.</span><span>Conservación y seguridad</span></h2>
-          <p>Conservamos tus datos mientras sean necesarios para las finalidades descritas y durante los plazos que exija la ley. Después los eliminamos o anonimizamos.</p>
-          <p>Aplicamos medidas de seguridad administrativas, técnicas y físicas razonables: acceso restringido al personal autorizado, conexiones cifradas (HTTPS), autenticación en dos pasos y respaldos cifrados.</p>
+          <p>Conservamos tus datos mientras sean necesarios para las finalidades descritas y durante los plazos que exija la ley. Después los eliminamos o anonimizamos. En particular:</p>
+          <ul>
+            <li>Los datos de campañas y rendimiento se conservan como historial de reportes mientras la relación con el cliente esté activa.</li>
+            <li>Los datos de prospectos se conservan hasta 24 meses después de terminar la relación con el cliente, salvo que el cliente pida borrarlos antes o la ley exija otra cosa.</li>
+            <li>Los datos recibidos de Meta se eliminan cuando ya no son necesarios para el fin con el que se obtuvieron o cuando se revoca el acceso, como exigen los Términos de la Plataforma de Meta.</li>
+          </ul>
+          <p>Aplicamos medidas de seguridad administrativas, técnicas y físicas razonables: acceso restringido al personal autorizado y por roles, conexiones cifradas (HTTPS), autenticación en dos pasos, respaldos cifrados, tokens de acceso guardados fuera del código fuente y solo los permisos mínimos necesarios. Ningún método de transmisión o almacenamiento es 100 % seguro, pero trabajamos para proteger la información contra accesos no autorizados, pérdida o uso indebido.</p>
         </section>
 
         <section id="derechos-arco">
@@ -224,30 +182,70 @@ h3{margin:26px 0 10px;font-family:Inter,sans-serif;font-weight:600;font-size:1.0
             <li>La descripción clara del derecho que quieres ejercer y de los datos a los que se refiere.</li>
           </ol>
           <p>Te responderemos en un plazo máximo de 20 días hábiles y, si la solicitud procede, la haremos efectiva dentro de los 15 días hábiles siguientes.</p>
+          <h3>Otras opciones</h3>
+          <ul>
+            <li><strong>Anuncios y cookies:</strong> puedes controlar la personalización de anuncios en Facebook e Instagram (Configuración y privacidad → Centro de cuentas → Preferencias de anuncios) y en tu cuenta de Google, y bloquear o borrar cookies en tu navegador.</li>
+            <li><strong>Mensajes de marketing:</strong> responde “BAJA” (o “STOP”) a los mensajes, o usa el enlace para darte de baja en los correos que envían nuestros clientes.</li>
+            <li><strong>Residentes de California:</strong> tienes derecho a saber, eliminar y corregir tu información personal, y a no ser discriminado por ejercer estos derechos. No vendemos ni compartimos información personal para publicidad conductual a cambio de dinero.</li>
+          </ul>
         </section>
 
         <section id="eliminacion-de-datos" class="card">
           <h2><span class="n">7.</span><span>Eliminación de datos</span></h2>
-          <p>Puedes pedir en cualquier momento que eliminemos tus datos y el historial de tus conversaciones:</p>
+          <p>Puedes pedir en cualquier momento que eliminemos tus datos y el historial de tus conversaciones, incluidos los que recibimos a través de nuestra app de Facebook / Instagram (Meta) y de nuestras integraciones con CRM.</p>
+
+          <h3>Opción 1 — Por correo</h3>
+          <ol>
+            <li>Escribe a <a href="mailto:adlekcontact@gmail.com?subject=Eliminaci%C3%B3n%20de%20datos">adlekcontact@gmail.com</a> con el asunto “Eliminación de datos”.</li>
+            <li>Incluye tu nombre completo y el correo o número de teléfono con el que nos contactaste. Si eres un cliente empresarial, agrega el nombre del negocio y el ID de la cuenta publicitaria o de la página.</li>
+            <li>Si contactaste a uno de nuestros clientes (por ejemplo, llenaste un formulario en una de sus páginas), indícanos el nombre del negocio si lo conoces.</li>
+          </ol>
+
+          <h3>Opción 2 — Por WhatsApp</h3>
+          <p>Envía el mensaje “ELIMINAR MIS DATOS” al mismo número con el que conversaste con nosotros.</p>
+
+          <h3>Opción 3 — Quita nuestra app de Facebook</h3>
+          <p>Si conectaste nuestra app a tu cuenta o negocio de Facebook:</p>
+          <ol>
+            <li>Entra a Facebook → <strong>Configuración y privacidad</strong> → <strong>Configuración</strong>.</li>
+            <li>Abre <strong>Apps y sitios web</strong> o, para activos de negocio, Configuración del negocio de Meta → <strong>Integraciones</strong> → <strong>Apps conectadas</strong>.</li>
+            <li>Busca nuestra app y selecciona <strong>Eliminar</strong>.</li>
+          </ol>
+          <p>Quitar la app detiene cualquier acceso futuro. Para borrar también los datos que ya recibimos, escríbenos como en la Opción 1.</p>
+
+          <h3>Plazos</h3>
+          <p>Confirmamos la recepción de tu solicitud en un máximo de 5 días hábiles y completamos la eliminación en un máximo de 20 días hábiles. Al terminar, te enviamos una confirmación con un código de referencia. Podemos pedirte que verifiques tu identidad antes de borrar los datos, para protegerte de solicitudes fraudulentas.</p>
+
+          <h3>Qué eliminamos</h3>
           <ul>
-            <li><strong>Por correo:</strong> escribe a <a href="mailto:adlekcontact@gmail.com?subject=Eliminaci%C3%B3n%20de%20datos">adlekcontact@gmail.com</a> con el asunto “Eliminación de datos” e indica el número de teléfono con el que nos contactaste.</li>
-            <li><strong>Por WhatsApp:</strong> envía el mensaje “ELIMINAR MIS DATOS” al mismo número con el que conversaste con nosotros.</li>
+            <li>Tu información de contacto y de prospecto (nombre, teléfono, correo, respuestas de formularios y chat) y el historial de tus conversaciones guardados en nuestros sistemas.</li>
+            <li>Los datos recibidos de Meta relacionados contigo o con los activos de tu negocio, incluidos los tokens de acceso guardados.</li>
+            <li>Los registros de eventos y analítica que puedan vincularse contigo.</li>
           </ul>
-          <p>Confirmaremos la eliminación en un plazo máximo de 20 días hábiles. Podremos conservar solo la información que la ley nos obligue a guardar.</p>
+          <p>Podremos conservar solo la información que la ley nos obligue a guardar (por ejemplo, registros de facturación) o la necesaria para resolver disputas, y solo durante el tiempo requerido. No se ven afectadas las estadísticas agregadas y anónimas que no pueden identificarte.</p>
+
+          <h3>Datos en poder de otras empresas</h3>
+          <p>Si contactaste a uno de nuestros clientes, ese negocio también es responsable de los datos de su propio CRM; le reenviaremos tu solicitud. Los datos que recaban directamente Meta o Google los controlan esas empresas: puedes borrarlos desde la configuración de tu cuenta de Facebook, Instagram o Google.</p>
         </section>
 
         <section id="cookies">
           <h2><span class="n">8.</span><span>Cookies y tecnologías similares</span></h2>
-          <p>Nuestro sitio web puede usar cookies y tecnologías similares para su funcionamiento y para análisis estadístico. Puedes desactivarlas desde la configuración de tu navegador.</p>
+          <p>Nuestro sitio web y las páginas que administramos para nuestros clientes pueden usar cookies, el Píxel de Meta, etiquetas de Google y tecnologías similares para su funcionamiento, para análisis estadístico y para medir anuncios. Con ellas se pueden recabar la dirección IP, información del navegador y del dispositivo, páginas vistas, identificadores de clic (como <code>fbclid</code> y <code>gclid</code>), parámetros UTM, cookies como <code>_fbp</code> y <code>_fbc</code>, e identificadores de eventos que sirven para no contar dos veces la misma conversión.</p>
+          <p>Puedes bloquearlas o borrarlas desde la configuración de tu navegador y controlar la publicidad personalizada como se indica en la <a href="#derechos-arco">sección 6</a>.</p>
+        </section>
+
+        <section id="menores">
+          <h2><span class="n">9.</span><span>Menores de edad</span></h2>
+          <p>Nuestros Servicios no están dirigidos a menores de 16 años y no recabamos sus datos personales a sabiendas.</p>
         </section>
 
         <section id="cambios">
-          <h2><span class="n">9.</span><span>Cambios a este aviso</span></h2>
-          <p>Cualquier cambio a este aviso de privacidad se publicará en esta misma página, con la fecha de actualización.</p>
+          <h2><span class="n">10.</span><span>Cambios a este aviso</span></h2>
+          <p>Cualquier cambio a este aviso de privacidad se publicará en esta misma página, con la fecha de actualización. Si los cambios son importantes, también avisaremos a nuestros clientes.</p>
         </section>
 
         <section id="contacto">
-          <h2><span class="n">10.</span><span>Contacto</span></h2>
+          <h2><span class="n">11.</span><span>Contacto</span></h2>
           <ul>
             <li><strong>Responsable:</strong> José Alek Nava Sánchez</li>
             <li><strong>Correo:</strong> <a href="mailto:adlekcontact@gmail.com">adlekcontact@gmail.com</a></li>

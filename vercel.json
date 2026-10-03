@@ -9,5 +9,27 @@
       "source": "/admin/:path*",
       "destination": "https://adlek-admin.vercel.app/admin/:path*"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacidad/en",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy.html",
+      "destination": "/privacidad/en",
+      "permanent": true
+    },
+    {
+      "source": "/data-deletion",
+      "destination": "/privacidad/en#data-deletion",
+      "permanent": true
+    },
+    {
+      "source": "/data-deletion.html",
+      "destination": "/privacidad/en#data-deletion",
+      "permanent": true
+    }
   ]
 }

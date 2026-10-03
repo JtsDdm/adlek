@@ -148,3 +148,10 @@ tipografías y piezas de la landing. Sus fuentes (`privacidad/fuentes/`) y logos
 son **copias** de los assets del bundle, igual que `adlek-logo.png`. La sección 7
 lleva `id="eliminacion-de-datos"`, enlazada desde fuera
 (`https://adlek.com.mx/privacidad#eliminacion-de-datos`): no cambiar ese id.
+
+El aviso cubre también la app de Meta (API de Marketing, Píxel, API de Conversiones) y
+las integraciones con CRM. Tiene versión en inglés en `privacidad/en/index.html`
+(servida en `/privacidad/en`, eliminación de datos en `#data-deletion`): **si se cambia
+el contenido de una, cambiar la otra**. Las dos comparten `privacidad/estilos.css`.
+`vercel.json` redirige `/privacy-policy` y `/data-deletion` (con o sin `.html`) a la
+versión en inglés.
