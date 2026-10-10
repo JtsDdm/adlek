@@ -26,10 +26,8 @@
   var CARD_ID    = 'adlek-caso-swiss';
   var ANCLA      = 'adlek-caso-3';   /* image-slot de la tarjeta de la Dra. Gloria */
   var TITULO     = 'SWISS DENTAL';
-  var TEXTO      = 'Campaña completa: grabamos en su clínica con cámara profesional, ' +
-                   'editamos el video, configuramos la campaña, creamos su landing e ' +
-                   'implementamos un bot de IA que agenda citas automáticamente. ' +
-                   'Sigue en curso y ya retornó 2.2 veces su inversión.';
+  var TEXTO      = 'Campaña completa: video profesional, landing y un bot de IA que ' +
+                   'agenda citas solo. Ya retornó 2.2 veces su inversión.';
   var FOTO       = 'imagenes/swiss-dental.webp';
   var FOTO_ALT   = 'Especialista de Swiss Dental trabajando con microscopio dental';
   var MAX_ESPERA = 15000;   /* red de seguridad si #dc-root nunca aparece */
