@@ -109,7 +109,7 @@ Reglas que se derivan de esto:
 
 ### Scripts actualmente montados
 
-Antes de `</body>` hay cinco líneas, y son el **único** cambio al export:
+Antes de `</body>` hay seis líneas, y son el **único** cambio al export:
 
 ```html
 <script defer src="page-boot.js"></script>
@@ -117,6 +117,7 @@ Antes de `</body>` hay cinco líneas, y son el **único** cambio al export:
 <script defer src="footer-links.js"></script>
 <script defer src="touch-scroll.js"></script>
 <script defer src="casos.js"></script>
+<script defer src="sistema.js"></script>
 ```
 
 `page-boot.js` resuelve tres parpadeos propios del export, todos sin tocarlo:
@@ -155,6 +156,13 @@ vecina para heredar su estilo inline, y un `MutationObserver` la repone si hicie
 falta. Su portada es un `<img>` normal que apunta a `imagenes/swiss-dental.webp`
 (1200×750, fuera del bundle). Para cambiar el texto, editar las constantes al inicio
 del script. Si se re-exporta con la tarjeta ya en la plantilla, el script no hace nada.
+
+`sistema.js` invierte los dos primeros pasos de "Todo conectado": "Contenido" queda
+como 01 (con un texto que resalta el equipo profesional) y "Sitio web" como 02. Es la
+**tercera excepción** a "nunca inyectar dentro de `#dc-root`". No mueve nodos de React:
+solo intercambia el texto de las dos tarjetas, así los números, el riel y las
+animaciones siguen en secuencia. Un `MutationObserver` lo vuelve a aplicar si hiciera
+falta, y si se re-exporta con "Contenido" ya primero, no hace nada.
 
 ### Páginas aparte del export
 
