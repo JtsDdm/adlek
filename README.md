@@ -13,6 +13,7 @@ tal cual está.
 | `chat-widget.js` | Burbuja de chat, aislada en Shadow DOM. Se monta sola en runtime. |
 | `chat-widget.css` | Estilos del widget. Se carga *dentro* del Shadow DOM, no desde el `<head>`. |
 | `footer-links.js` | Agrega "Aviso de Privacidad" al pie de la landing, en runtime. |
+| `touch-scroll.js` | Devuelve el scroll táctil sobre las imágenes en celular. |
 | `privacidad/` | Aviso de Privacidad, servido en `/privacidad`. HTML estático normal, no bundle. |
 | `CLAUDE.md` | Reglas de trabajo sobre el export. **Leer antes de tocar `index.html`.** |
 
@@ -31,12 +32,13 @@ archivo. Las únicas URLs externas son de navegación (WhatsApp, correo, Instagr
 
 ## Los scripts añadidos
 
-El export se toca **solo** con estas tres líneas antes de `</body>`:
+El export se toca **solo** con estas cuatro líneas antes de `</body>`:
 
 ```html
 <script defer src="page-boot.js"></script>
 <script defer src="chat-widget.js"></script>
 <script defer src="footer-links.js"></script>
+<script defer src="touch-scroll.js"></script>
 ```
 
 ### `page-boot.js` — arranque limpio

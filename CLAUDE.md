@@ -109,12 +109,13 @@ Reglas que se derivan de esto:
 
 ### Scripts actualmente montados
 
-Antes de `</body>` hay tres líneas, y son el **único** cambio al export:
+Antes de `</body>` hay cuatro líneas, y son el **único** cambio al export:
 
 ```html
 <script defer src="page-boot.js"></script>
 <script defer src="chat-widget.js"></script>
 <script defer src="footer-links.js"></script>
+<script defer src="touch-scroll.js"></script>
 ```
 
 `page-boot.js` resuelve tres parpadeos propios del export, todos sin tocarlo:
@@ -139,6 +140,12 @@ columna de enlaces del pie. Es la **única excepción** a "nunca inyectar dentro
 (verificado: el mismo nodo sobrevive a todos los toggles del acordeón) y, por si
 un render futuro recreara la columna, un `MutationObserver` lo repone. Si se
 re-exporta con el enlace ya en la plantilla, el script lo detecta y no hace nada.
+
+`touch-scroll.js` devuelve el scroll táctil sobre las imágenes. El `<image-slot>` del
+export trae `.frame img{touch-action:none}` en su Shadow DOM (sirve para reencuadrar
+la foto en Claude Design), y en celular eso impedía desplazar la página con el dedo
+sobre una imagen. El script agrega `image-slot::part(image){touch-action:auto}` al
+`<head>` del documento ya desempaquetado; no toca el export.
 
 ### Páginas aparte del export
 
