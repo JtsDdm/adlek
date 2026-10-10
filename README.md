@@ -17,6 +17,8 @@ tal cual está.
 | `casos.js` | Agrega la tarjeta "SWISS DENTAL" a "Trabajos entregados", en runtime. |
 | `sistema.js` | Pone "Contenido" como paso 01 y "Sitio web" como 02 en "Todo conectado". |
 | `riel.js` | Enciende cada tarjeta de "Todo conectado" justo cuando el punto del riel pasa sobre ella. |
+| `hero-video.js` | Anima al doctor del hero con un video transparente sobre la imagen fija. |
+| `imagenes/hero-doctor.webm` / `.mp4` | Ese video: WebM para Chrome/Firefox/Android, HEVC para Safari/iOS. |
 | `imagenes/swiss-dental.webp` | Portada de esa tarjeta. Vive fuera del bundle. |
 | `privacidad/` | Aviso de Privacidad, servido en `/privacidad`. HTML estático normal, no bundle. |
 | `CLAUDE.md` | Reglas de trabajo sobre el export. **Leer antes de tocar `index.html`.** |
@@ -36,7 +38,7 @@ archivo. Las únicas URLs externas son de navegación (WhatsApp, correo, Instagr
 
 ## Los scripts añadidos
 
-El export se toca **solo** con estas siete líneas antes de `</body>`:
+El export se toca **solo** con estas ocho líneas antes de `</body>`:
 
 ```html
 <script defer src="page-boot.js"></script>
@@ -46,6 +48,7 @@ El export se toca **solo** con estas siete líneas antes de `</body>`:
 <script defer src="casos.js"></script>
 <script defer src="sistema.js"></script>
 <script defer src="riel.js"></script>
+<script defer src="hero-video.js"></script>
 ```
 
 ### `page-boot.js` — arranque limpio

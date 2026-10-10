@@ -109,7 +109,7 @@ Reglas que se derivan de esto:
 
 ### Scripts actualmente montados
 
-Antes de `</body>` hay siete líneas, y son el **único** cambio al export:
+Antes de `</body>` hay ocho líneas, y son el **único** cambio al export:
 
 ```html
 <script defer src="page-boot.js"></script>
@@ -119,6 +119,7 @@ Antes de `</body>` hay siete líneas, y son el **único** cambio al export:
 <script defer src="casos.js"></script>
 <script defer src="sistema.js"></script>
 <script defer src="riel.js"></script>
+<script defer src="hero-video.js"></script>
 ```
 
 `page-boot.js` resuelve tres parpadeos propios del export, todos sin tocarlo:
@@ -172,6 +173,28 @@ iluminaba con retraso respecto al punto. El script apaga las animaciones CSS de
 tarjetas y checkpoints con estilos inline en runtime y, en cada frame, enciende la
 tarjeta sobre la que está pasando el punto real. Solo corre mientras la sección está
 en pantalla, y no hace nada con `prefers-reduced-motion`.
+
+`hero-video.js` anima al doctor del hero. Pone un `<video>` con fondo transparente
+encima del `<image-slot>` `#adlek-hero-overlay`, copiando la caja exacta de su `<img>`, y
+oculta la imagen fija solo cuando el video ya se está reproduciendo; si no puede
+(autoplay bloqueado, navegador viejo, `prefers-reduced-motion`), queda la imagen del
+export. Hay **dos archivos a propósito**: `imagenes/hero-doctor.webm` (VP9 con alfa,
+Chrome/Firefox/Android) y `imagenes/hero-doctor.mp4` (HEVC con alfa, Safari/iOS). Safari
+abre WebM pero ignora el alfa y pinta negro, por eso el script elige por navegador. Los
+dos salen de un máster ProRes 4444 de 5 s reproducido ida y vuelta (bucle de 10 s sin
+salto), a 800×800. Para regenerarlos desde un `.mov` nuevo:
+
+```bash
+FC="[0:v]scale=800:800:flags=lanczos,format=yuva444p,split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1[v]"
+ffmpeg -i master.mov -filter_complex "$FC;[v]format=yuva420p[o]" -map "[o]" -an \
+  -c:v libvpx-vp9 -b:v 0 -crf 34 -row-mt 1 imagenes/hero-doctor.webm
+ffmpeg -i master.mov -filter_complex "$FC;[v]format=bgra[o]" -map "[o]" -an \
+  -c:v hevc_videotoolbox -allow_sw 1 -alpha_quality 0.8 -q:v 55 -tag:v hvc1 \
+  -movflags +faststart imagenes/hero-doctor.mp4
+```
+
+El `.gitignore` ignora `*.mov` y `*.mp4` (grabaciones de trabajo) con una excepción
+explícita para `imagenes/hero-doctor.mp4`. El máster `.mov` no se sube.
 
 ### Páginas aparte del export
 

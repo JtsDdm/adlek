@@ -5,3 +5,6 @@ node_modules/
 # Grabaciones y capturas de trabajo, no forman parte del sitio
 *.mov
 *.mp4
+
+# Excepción: el video del hero sí es parte del sitio (ver hero-video.js)
+!imagenes/hero-doctor.mp4
