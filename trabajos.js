@@ -63,7 +63,7 @@
       'box-shadow:inset 0 1px 0 rgba(244,242,237,.14)}' +
     '.feat{position:relative;flex:none;width:var(--cell);height:var(--cell);border-radius:14px;' +
       'overflow:hidden;background:#E4E1D8;' +
-      'box-shadow:0 0 0 2px #F4F2ED,5px 5px 0 2px #10393B;' +
+      'box-shadow:5px 5px 0 #10393B;' +
       'opacity:.45;transform:scale(.94);' +
       'transition:opacity ' + SLIDE_MS + 'ms ease,transform ' + SLIDE_MS + 'ms cubic-bezier(.65,0,.35,1)}' +
     '.feat.on{opacity:1;transform:scale(1)}' +
