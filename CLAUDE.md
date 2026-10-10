@@ -109,7 +109,7 @@ Reglas que se derivan de esto:
 
 ### Scripts actualmente montados
 
-Antes de `</body>` hay ocho líneas, y son el **único** cambio al export:
+Antes de `</body>` hay nueve líneas, y son el **único** cambio al export:
 
 ```html
 <script defer src="page-boot.js"></script>
@@ -117,6 +117,7 @@ Antes de `</body>` hay ocho líneas, y son el **único** cambio al export:
 <script defer src="footer-links.js"></script>
 <script defer src="touch-scroll.js"></script>
 <script defer src="casos.js"></script>
+<script defer src="trabajos.js"></script>
 <script defer src="sistema.js"></script>
 <script defer src="riel.js"></script>
 <script defer src="hero-video.js"></script>
@@ -195,6 +196,17 @@ ffmpeg -i master.mov -filter_complex "$FC;[v]format=bgra[o]" -map "[o]" -an \
 
 El `.gitignore` ignora `*.mov` y `*.mp4` (grabaciones de trabajo) con una excepción
 explícita para `imagenes/hero-doctor.mp4`. El máster `.mov` no se sube.
+
+`trabajos.js` convierte "Trabajos entregados" en un carrusel tipo *scroll reel*: un
+mosaico de tres columnas donde la central lleva las fotos y las laterales giran en
+sentido contrario, con el texto entrando letra por letra y flechas para cambiar (también
+teclado y deslizar con el dedo). **No guarda contenido propio**: lee título, descripción y
+foto de las tarjetas que ya están en el DOM, en su orden, incluida la de `casos.js`; para
+agregar o editar un trabajo se toca la tarjeta, no el carrusel. La rejilla original solo
+se oculta (`display:none` inline en runtime), así que si el script fallara la sección se
+ve como antes. Vive en Shadow DOM y se inserta dentro de la sección: otra excepción a
+"nunca inyectar dentro de `#dc-root`", con `MutationObserver` que lo repone. Debe cargarse
+**después** de `casos.js`.
 
 ### Páginas aparte del export
 

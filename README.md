@@ -15,6 +15,7 @@ tal cual está.
 | `footer-links.js` | Agrega "Aviso de Privacidad" al pie de la landing, en runtime. |
 | `touch-scroll.js` | Devuelve el scroll táctil sobre las imágenes en celular. |
 | `casos.js` | Agrega la tarjeta "SWISS DENTAL" a "Trabajos entregados", en runtime. |
+| `trabajos.js` | Muestra "Trabajos entregados" como carrusel; lee las tarjetas que ya existen. |
 | `sistema.js` | Pone "Contenido" como paso 01 y "Sitio web" como 02 en "Todo conectado". |
 | `riel.js` | Enciende cada tarjeta de "Todo conectado" justo cuando el punto del riel pasa sobre ella. |
 | `hero-video.js` | Anima al doctor del hero con un video transparente sobre la imagen fija. |
@@ -38,7 +39,7 @@ archivo. Las únicas URLs externas son de navegación (WhatsApp, correo, Instagr
 
 ## Los scripts añadidos
 
-El export se toca **solo** con estas ocho líneas antes de `</body>`:
+El export se toca **solo** con estas nueve líneas antes de `</body>`:
 
 ```html
 <script defer src="page-boot.js"></script>
@@ -46,6 +47,7 @@ El export se toca **solo** con estas ocho líneas antes de `</body>`:
 <script defer src="footer-links.js"></script>
 <script defer src="touch-scroll.js"></script>
 <script defer src="casos.js"></script>
+<script defer src="trabajos.js"></script>
 <script defer src="sistema.js"></script>
 <script defer src="riel.js"></script>
 <script defer src="hero-video.js"></script>
