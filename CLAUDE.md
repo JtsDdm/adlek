@@ -109,13 +109,14 @@ Reglas que se derivan de esto:
 
 ### Scripts actualmente montados
 
-Antes de `</body>` hay cuatro líneas, y son el **único** cambio al export:
+Antes de `</body>` hay cinco líneas, y son el **único** cambio al export:
 
 ```html
 <script defer src="page-boot.js"></script>
 <script defer src="chat-widget.js"></script>
 <script defer src="footer-links.js"></script>
 <script defer src="touch-scroll.js"></script>
+<script defer src="casos.js"></script>
 ```
 
 `page-boot.js` resuelve tres parpadeos propios del export, todos sin tocarlo:
@@ -146,6 +147,14 @@ export trae `.frame img{touch-action:none}` en su Shadow DOM (sirve para reencua
 la foto en Claude Design), y en celular eso impedía desplazar la página con el dedo
 sobre una imagen. El script agrega `image-slot::part(image){touch-action:auto}` al
 `<head>` del documento ya desempaquetado; no toca el export.
+
+`casos.js` agrega la tarjeta "SWISS DENTAL" a "Trabajos entregados", justo después de
+la de la Dra. Gloria. Es la **segunda excepción** a "nunca inyectar dentro de
+`#dc-root`", con el mismo patrón que `footer-links.js`: clona los nodos de la tarjeta
+vecina para heredar su estilo inline, y un `MutationObserver` la repone si hiciera
+falta. Su portada es un `<img>` normal que apunta a `imagenes/swiss-dental.webp`
+(1200×750, fuera del bundle). Para cambiar el texto, editar las constantes al inicio
+del script. Si se re-exporta con la tarjeta ya en la plantilla, el script no hace nada.
 
 ### Páginas aparte del export
 
