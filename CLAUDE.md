@@ -109,7 +109,7 @@ Reglas que se derivan de esto:
 
 ### Scripts actualmente montados
 
-Antes de `</body>` hay seis líneas, y son el **único** cambio al export:
+Antes de `</body>` hay siete líneas, y son el **único** cambio al export:
 
 ```html
 <script defer src="page-boot.js"></script>
@@ -118,6 +118,7 @@ Antes de `</body>` hay seis líneas, y son el **único** cambio al export:
 <script defer src="touch-scroll.js"></script>
 <script defer src="casos.js"></script>
 <script defer src="sistema.js"></script>
+<script defer src="riel.js"></script>
 ```
 
 `page-boot.js` resuelve tres parpadeos propios del export, todos sin tocarlo:
@@ -163,6 +164,14 @@ como 01 (con un texto que resalta el equipo profesional) y "Sitio web" como 02. 
 solo intercambia el texto de las dos tarjetas, así los números, el riel y las
 animaciones siguen en secuencia. Un `MutationObserver` lo vuelve a aplicar si hiciera
 falta, y si se re-exporta con "Contenido" ya primero, no hace nada.
+
+`riel.js` sincroniza el riel de "Todo conectado". En el export, el punto que baja
+(`adlekRailDot`, con `ease-in-out`) y el encendido de las tarjetas (`adlekCard1..5`, en
+porcentajes fijos del tiempo) son animaciones independientes, así que la tarjeta se
+iluminaba con retraso respecto al punto. El script apaga las animaciones CSS de
+tarjetas y checkpoints con estilos inline en runtime y, en cada frame, enciende la
+tarjeta sobre la que está pasando el punto real. Solo corre mientras la sección está
+en pantalla, y no hace nada con `prefers-reduced-motion`.
 
 ### Páginas aparte del export
 
