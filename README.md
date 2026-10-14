@@ -10,7 +10,7 @@ tal cual está.
 | `index.html` | La landing. **Export de Claude Design y fuente de verdad del diseño.** |
 | `page-boot.js` | Arranque: splash con el logo real y sin parpadeos al cargar. |
 | `adlek-logo.png` | Logo para el splash. Copia reducida del que ya viaja en el bundle. |
-| `chat-widget.js` | Burbuja de chat, aislada en Shadow DOM. Se monta sola en runtime. |
+| `chat-widget.js` | Burbuja de chat, aislada en Shadow DOM. **Oculta hoy**: su `<script>` no está en `index.html`. |
 | `chat-widget.css` | Estilos del widget. Se carga *dentro* del Shadow DOM, no desde el `<head>`. |
 | `footer-links.js` | Agrega "Aviso de Privacidad" al pie de la landing, en runtime. |
 | `touch-scroll.js` | Devuelve el scroll táctil sobre las imágenes en celular. |
@@ -20,7 +20,7 @@ tal cual está.
 | `riel.js` | Enciende cada tarjeta de "Todo conectado" justo cuando el punto del riel pasa sobre ella. |
 | `hero-video.js` | Anima al doctor del hero con un video transparente sobre la imagen fija. |
 | `imagenes/hero-doctor.webm` / `.mp4` | Ese video: WebM para Chrome/Firefox/Android, HEVC para Safari/iOS. |
-| `vsl.js` | Reproductor del video de la sección "El problema". No descarga nada hasta el play. |
+| `vsl.js` | Reproductor del video de "El problema" (no descarga nada hasta el play) y CTA de WhatsApp debajo. |
 | `imagenes/vsl-1080.mp4` / `vsl-720.mp4` / `vsl-poster.webp` | Ese video en dos calidades y su portada. |
 | `imagenes/swiss-dental.webp` | Portada de esa tarjeta. Vive fuera del bundle. |
 | `privacidad/` | Aviso de Privacidad, servido en `/privacidad`. HTML estático normal, no bundle. |
@@ -41,11 +41,10 @@ archivo. Las únicas URLs externas son de navegación (WhatsApp, correo, Instagr
 
 ## Los scripts añadidos
 
-El export se toca **solo** con estas diez líneas antes de `</body>`:
+El export se toca **solo** con estas nueve líneas antes de `</body>`:
 
 ```html
 <script defer src="page-boot.js"></script>
-<script defer src="chat-widget.js"></script>
 <script defer src="footer-links.js"></script>
 <script defer src="touch-scroll.js"></script>
 <script defer src="casos.js"></script>

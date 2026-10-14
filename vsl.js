@@ -26,6 +26,12 @@
    bajarse completos y se puede adelantar. Salen del máster de Media Encoder
    (imagenes/finalvid.mp4, que no se sube); el comando está en CLAUDE.md.
 
+   DEBAJO DEL VIDEO: CTA A WHATSAPP
+
+   Un botón "Hablemos por WhatsApp" con el estilo del CTA del hero (píldora
+   naranja con sombra dura y la flecha a mano). Toma el enlace del CTA del
+   nav (#adlek-nav-cta), así el número vive en un solo lugar: el export.
+
    El reproductor vive en un Shadow DOM dentro del recuadro del export (árbol
    React): es una excepción a "nunca inyectar dentro de #dc-root" (CLAUDE.md),
    con el mismo patrón que footer-links.js. Si el script fallara, queda el
@@ -42,6 +48,9 @@
   var POSTER     = 'imagenes/vsl-poster.webp';
   var MAX_ESPERA = 15000;   /* red de seguridad si #dc-root nunca aparece */
   var ATORONES   = 2;       /* pausas por búfer antes de bajar de calidad */
+  var CTA_ID     = 'adlek-vsl-cta';
+  var CTA_TEXTO  = 'Hablemos por WhatsApp';
+  var WA_RESPALDO = 'https://wa.me/522461957348';   /* si el nav no estuviera */
 
   var CSS =
     ':host{position:absolute;inset:0;display:block;border-radius:inherit;overflow:hidden;' +
@@ -65,7 +74,31 @@
     '.play:focus-visible .disco{outline:3px solid #F4F2ED;outline-offset:4px}' +
     '@media (prefers-reduced-motion:reduce){.disco{transition:none}}';
 
+  var CSS_CTA =
+    ':host{display:flex;justify-content:center;margin:clamp(28px,4vw,40px) 0 0}' +
+    'a{display:inline-flex;align-items:center;justify-content:center;gap:12px;' +
+      'background:#E8683C;color:#1C1C1C;text-decoration:none;' +
+      'font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:1.08rem;line-height:1;' +
+      'padding:20px 34px;border-radius:999px;box-shadow:5px 5px 0 #10393B;' +
+      '-webkit-tap-highlight-color:transparent;' +
+      'transition:transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s}' +
+    'a:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #10393B}' +
+    'a:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #10393B}' +
+    'a:focus-visible{outline:3px solid #1A6265;outline-offset:4px}' +
+    'svg{width:30px;height:16px;flex:none}' +
+    '@media (max-width:620px){a{width:min(100%,420px);font-size:1.14rem;padding:24px 30px}}' +
+    '@media (prefers-reduced-motion:reduce){a{transition:none}}';
+
+  /* La misma flecha del CTA del hero y del nav */
+  var FLECHA =
+    '<svg viewBox="0 0 34 18" fill="none" aria-hidden="true">' +
+      '<path d="M1 15 C 9 15 14 5 27 4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>' +
+      '<path d="M21 1.5 L28.5 4 L23.5 9.5" stroke="currentColor" stroke-width="2.6" ' +
+      'stroke-linecap="round" stroke-linejoin="round"/>' +
+    '</svg>';
+
   var caja = null, host = null, root = null, video = null;
+  var cta = null, ctaLink = null;
   var enBaja = false;
   var atorones = 0;
 
@@ -162,6 +195,28 @@
     root.appendChild(boton);
   }
 
+  function enlaceWhatsApp() {
+    var nav = document.getElementById('adlek-nav-cta');
+    var href = nav && nav.getAttribute('href');
+    return href && /^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(href) ? href : WA_RESPALDO;
+  }
+
+  function construirCta() {
+    cta = document.createElement('div');
+    cta.id = CTA_ID;
+    var r = cta.attachShadow({ mode: 'open' });
+    var style = document.createElement('style');
+    style.textContent = CSS_CTA;
+    r.appendChild(style);
+    ctaLink = document.createElement('a');
+    ctaLink.href = enlaceWhatsApp();
+    ctaLink.target = '_blank';
+    ctaLink.rel = 'noopener';
+    ctaLink.appendChild(document.createTextNode(CTA_TEXTO));
+    ctaLink.insertAdjacentHTML('beforeend', FLECHA);   /* markup propio y estático */
+    r.appendChild(ctaLink);
+  }
+
   function buscarCaja() {
     var sec = document.querySelector(SECCION);
     return sec && sec.querySelector('div[style*="aspect-ratio"]');
@@ -172,12 +227,18 @@
     if (!c || !host) return;
     caja = c;
     if (host.parentNode !== caja) caja.appendChild(host);
+    /* El CTA va justo debajo del recuadro, como hermano. */
+    if (cta && caja.parentNode && cta.previousSibling !== caja) {
+      caja.parentNode.insertBefore(cta, caja.nextSibling);
+    }
+    if (ctaLink) ctaLink.href = enlaceWhatsApp();
   }
 
   function montar() {
     if (!document.getElementById('dc-root')) return false;
     if (!buscarCaja()) return false;
     construir();
+    construirCta();
     insertar();
     new MutationObserver(insertar)
       .observe(document.getElementById('dc-root'), { childList: true, subtree: true });

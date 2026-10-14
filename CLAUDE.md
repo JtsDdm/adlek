@@ -109,11 +109,10 @@ Reglas que se derivan de esto:
 
 ### Scripts actualmente montados
 
-Antes de `</body>` hay diez líneas, y son el **único** cambio al export:
+Antes de `</body>` hay nueve líneas, y son el **único** cambio al export:
 
 ```html
 <script defer src="page-boot.js"></script>
-<script defer src="chat-widget.js"></script>
 <script defer src="footer-links.js"></script>
 <script defer src="touch-scroll.js"></script>
 <script defer src="casos.js"></script>
@@ -139,6 +138,11 @@ Cuidado si se toca: quitar el `<style>` del puente **es en sí mismo una
 mutación del DOM**. Si el `MutationObserver` sigue conectado en ese momento, el
 callback vuelve a ver que no hay estilo y lo reinstala en bucle. Por eso
 `finalizar()` desconecta el observer y retira el estilo en el mismo paso.
+
+**La burbuja de chat está oculta**: su línea `<script defer src="chat-widget.js">` se
+quitó del `index.html` (sigue sin backend, ver README). Los archivos `chat-widget.js` y
+`chat-widget.css` se conservan; para volver a mostrarla basta reponer esa línea después
+de `page-boot.js`.
 
 `footer-links.js` agrega "Aviso de Privacidad" (→ `/privacidad`) al final de la
 columna de enlaces del pie. Es la **única excepción** a "nunca inyectar dentro de
@@ -215,7 +219,9 @@ el export es un placeholder oscuro con un botón de play. Monta encima una porta
 clic**; ahí crea un `<video controls>` y lo reproduce con sonido. Hay dos calidades:
 `imagenes/vsl-1080.mp4` (por defecto) y `imagenes/vsl-720.mp4` (si `navigator.connection`
 reporta conexión lenta o ahorro de datos, o si el 1080 se atora dos veces: cambia en el
-mismo segundo). Vive en Shadow DOM dentro del recuadro: otra excepción a "nunca inyectar
+mismo segundo). Debajo del recuadro agrega un CTA "Hablemos por WhatsApp" con el estilo
+del CTA del hero; toma el enlace de `#adlek-nav-cta`, así el número vive solo en el export.
+Vive en Shadow DOM dentro del recuadro: otra excepción a "nunca inyectar
 dentro de `#dc-root`", con `MutationObserver` que lo repone. Los subtítulos van quemados
 en la imagen. El máster (`imagenes/finalvid.mp4`, 673 MB) no se sube; para regenerar:
 
