@@ -20,6 +20,8 @@ tal cual está.
 | `riel.js` | Enciende cada tarjeta de "Todo conectado" justo cuando el punto del riel pasa sobre ella. |
 | `hero-video.js` | Anima al doctor del hero con un video transparente sobre la imagen fija. |
 | `imagenes/hero-doctor.webm` / `.mp4` | Ese video: WebM para Chrome/Firefox/Android, HEVC para Safari/iOS. |
+| `vsl.js` | Reproductor del video de la sección "El problema". No descarga nada hasta el play. |
+| `imagenes/vsl-1080.mp4` / `vsl-720.mp4` / `vsl-poster.webp` | Ese video en dos calidades y su portada. |
 | `imagenes/swiss-dental.webp` | Portada de esa tarjeta. Vive fuera del bundle. |
 | `privacidad/` | Aviso de Privacidad, servido en `/privacidad`. HTML estático normal, no bundle. |
 | `CLAUDE.md` | Reglas de trabajo sobre el export. **Leer antes de tocar `index.html`.** |
@@ -39,7 +41,7 @@ archivo. Las únicas URLs externas son de navegación (WhatsApp, correo, Instagr
 
 ## Los scripts añadidos
 
-El export se toca **solo** con estas nueve líneas antes de `</body>`:
+El export se toca **solo** con estas diez líneas antes de `</body>`:
 
 ```html
 <script defer src="page-boot.js"></script>
@@ -51,6 +53,7 @@ El export se toca **solo** con estas nueve líneas antes de `</body>`:
 <script defer src="sistema.js"></script>
 <script defer src="riel.js"></script>
 <script defer src="hero-video.js"></script>
+<script defer src="vsl.js"></script>
 ```
 
 ### `page-boot.js` — arranque limpio

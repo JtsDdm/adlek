@@ -8,3 +8,5 @@ node_modules/
 
 # Excepción: el video del hero sí es parte del sitio (ver hero-video.js)
 !imagenes/hero-doctor.mp4
+!imagenes/vsl-1080.mp4
+!imagenes/vsl-720.mp4

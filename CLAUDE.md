@@ -109,7 +109,7 @@ Reglas que se derivan de esto:
 
 ### Scripts actualmente montados
 
-Antes de `</body>` hay nueve líneas, y son el **único** cambio al export:
+Antes de `</body>` hay diez líneas, y son el **único** cambio al export:
 
 ```html
 <script defer src="page-boot.js"></script>
@@ -121,6 +121,7 @@ Antes de `</body>` hay nueve líneas, y son el **único** cambio al export:
 <script defer src="sistema.js"></script>
 <script defer src="riel.js"></script>
 <script defer src="hero-video.js"></script>
+<script defer src="vsl.js"></script>
 ```
 
 `page-boot.js` resuelve tres parpadeos propios del export, todos sin tocarlo:
@@ -207,6 +208,29 @@ se oculta (`display:none` inline en runtime), así que si el script fallara la s
 ve como antes. Vive en Shadow DOM y se inserta dentro de la sección: otra excepción a
 "nunca inyectar dentro de `#dc-root`", con `MutationObserver` que lo repone. Debe cargarse
 **después** de `casos.js`.
+
+`vsl.js` pone el video (VSL) en el recuadro 16:9 de la sección "El problema", que en
+el export es un placeholder oscuro con un botón de play. Monta encima una portada
+(`imagenes/vsl-poster.webp`) con el mismo botón naranja y **no descarga el video hasta el
+clic**; ahí crea un `<video controls>` y lo reproduce con sonido. Hay dos calidades:
+`imagenes/vsl-1080.mp4` (por defecto) y `imagenes/vsl-720.mp4` (si `navigator.connection`
+reporta conexión lenta o ahorro de datos, o si el 1080 se atora dos veces: cambia en el
+mismo segundo). Vive en Shadow DOM dentro del recuadro: otra excepción a "nunca inyectar
+dentro de `#dc-root`", con `MutationObserver` que lo repone. Los subtítulos van quemados
+en la imagen. El máster (`imagenes/finalvid.mp4`, 673 MB) no se sube; para regenerar:
+
+```bash
+ffmpeg -i master.mp4 -c:v libx264 -preset slow -crf 23 -maxrate 3500k -bufsize 7000k \
+  -profile:v high -level 4.1 -pix_fmt yuv420p -g 60 -keyint_min 60 -sc_threshold 0 \
+  -c:a aac -b:a 128k -ac 2 -movflags +faststart imagenes/vsl-1080.mp4
+ffmpeg -i master.mp4 -vf "scale=1280:720:flags=lanczos" -c:v libx264 -preset slow -crf 24 \
+  -maxrate 1800k -bufsize 3600k -profile:v high -level 3.1 -pix_fmt yuv420p -g 60 \
+  -keyint_min 60 -sc_threshold 0 -c:a aac -b:a 96k -ac 2 -movflags +faststart imagenes/vsl-720.mp4
+```
+
+Ojo con el peso: `vsl-1080.mp4` son 83 MB. GitHub rechaza archivos de más de 100 MB, así
+que un video más largo o con más bitrate ya no cabría en el repo y tendría que ir a un
+servicio de video. Ambos `.mp4` tienen excepción explícita en `.gitignore`.
 
 ### Páginas aparte del export
 
