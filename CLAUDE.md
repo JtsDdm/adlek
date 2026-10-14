@@ -153,8 +153,8 @@ la foto en Claude Design), y en celular eso impedía desplazar la página con el
 sobre una imagen. El script agrega `image-slot::part(image){touch-action:auto}` al
 `<head>` del documento ya desempaquetado; no toca el export.
 
-`casos.js` agrega la tarjeta "SWISS DENTAL" a "Trabajos entregados", justo después de
-la de la Dra. Gloria. Es la **segunda excepción** a "nunca inyectar dentro de
+`casos.js` agrega la tarjeta "SWISS DENTAL" a "Trabajos entregados", en primer lugar, justo
+antes de la de la Dra. Gloria. Es la **segunda excepción** a "nunca inyectar dentro de
 `#dc-root`", con el mismo patrón que `footer-links.js`: clona los nodos de la tarjeta
 vecina para heredar su estilo inline, y un `MutationObserver` la repone si hiciera
 falta. Su portada es un `<img>` normal que apunta a `imagenes/swiss-dental.webp`

@@ -3,7 +3,7 @@
 
    Las tarjetas de la sección viven dentro de la plantilla del bundle
    (index.html:393) y las pinta React en #dc-root, así que no se pueden editar
-   en el HTML. Este script agrega la tarjeta en runtime, justo después de la
+   en el HTML. Este script agrega la tarjeta en runtime, en primer lugar, justo antes de la
    de la Dra. Gloria, clonando sus nodos para heredar el estilo inline exacto.
 
    Es una excepción a "nunca inyectar dentro de #dc-root" (CLAUDE.md), igual
@@ -79,7 +79,7 @@
     card.appendChild(h3Nuevo);
     card.appendChild(pNuevo);
 
-    grid.insertBefore(card, base.nextSibling);
+    grid.insertBefore(card, base);   /* primera: va antes de la Dra. Gloria */
   }
 
   function montar() {
